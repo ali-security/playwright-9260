@@ -31,7 +31,7 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-        os: [ubuntu-20.04, ubuntu-24.04]
+        os: [ubuntu-24.04, ubuntu-24.04]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
@@ -78,14 +78,14 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/actions/run-test
       with:
         browsers-to-install: ${{ matrix.browser }} chromium
         command: npm run test -- --project=${{ matrix.browser }}-* ${{ matrix.browser == 'firefox' && '--workers 1' || '' }}
-        bot-name: "${{ matrix.browser }}-windows-latest"
+        bot-name: "${{ matrix.browser }}-windows-2022"
         flakiness-client-id: ${{ secrets.AZURE_FLAKINESS_DASHBOARD_CLIENT_ID }}
         flakiness-tenant-id: ${{ secrets.AZURE_FLAKINESS_DASHBOARD_TENANT_ID }}
         flakiness-subscription-id: ${{ secrets.AZURE_FLAKINESS_DASHBOARD_SUBSCRIPTION_ID }}
@@ -98,9 +98,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - os: ubuntu-latest
+        - os: ubuntu-24.04
           node_version: 20
-        - os: ubuntu-latest
+        - os: ubuntu-24.04
           node_version: 22
     timeout-minutes: 30
     steps:
@@ -130,11 +130,11 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-        os: [ubuntu-24.04, macos-14-xlarge, windows-latest]
+        os: [ubuntu-24.04, macos-14-xlarge, windows-2022]
         include:
           # We have different binaries per Ubuntu version for WebKit.
           - browser: webkit
-            os: ubuntu-20.04
+            os: ubuntu-24.04
           - browser: webkit
             os: ubuntu-22.04
     runs-on: ${{ matrix.os }}
@@ -156,7 +156,7 @@ jobs:
       fail-fast: false
       matrix:
         mode: [driver, service]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/actions/run-test
@@ -182,7 +182,7 @@ jobs:
           - browser: webkit
           - browser: chromium
             channel: chromium-tip-of-tree
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/actions/run-test
@@ -205,7 +205,7 @@ jobs:
       fail-fast: false
       matrix:
         channel: [chrome, chrome-beta, msedge, msedge-beta, msedge-dev]
-        runs-on: [ubuntu-20.04, macos-latest, windows-latest]
+        runs-on: [ubuntu-24.04, macos-14, windows-2022]
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/actions/run-test
@@ -226,7 +226,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, macos-13, windows-latest]
+        os: [ubuntu-24.04, macos-13, windows-2022]
         headed: ['--headed', '']
     steps:
     - uses: actions/checkout@v4
@@ -248,7 +248,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-24.04]
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/actions/run-test
@@ -269,7 +269,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-latest, macos-latest]
+        os: [ubuntu-24.04, windows-2022, macos-14]
     steps:
     - uses: actions/checkout@v4
     - uses: ./.github/actions/run-test
@@ -302,7 +302,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: [ubuntu-latest, windows-latest, macos-latest]
+        runs-on: [ubuntu-24.04, windows-2022, macos-14]
     runs-on: ${{ matrix.runs-on }}
     steps:
     - uses: actions/checkout@v4

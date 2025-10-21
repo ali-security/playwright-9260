@@ -15,7 +15,7 @@ jobs:
       matrix:
         service-os: [linux, windows]
         browser: [chromium, firefox, webkit]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -44,7 +44,7 @@ jobs:
     name: "Merge reports"
     needs: [test]
     if: ${{ !cancelled() }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
